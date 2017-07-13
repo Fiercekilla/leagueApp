@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="background-champ">
+    <img [src]="bgChampImg">
+  </div>
+  <ion-item class="title">
+    <ion-avatar item-start>
+      <img [src]="matchData.champImg">
+    </ion-avatar>
+    <h2>{{ matchData.champName }}</h2>
+    <p>{{ matchData.champTitle }}</p>
+    <p class="game-result" [class.win]="matchData.stats.win" [class.lose]="!matchData.stats.win">{{ matchData.stats.win ? 'Победа' : 'Поражение' }}</p>
+    <ion-icon item-end class="icon icon-md ion-md-arrow-forward" (click)="closeDetails()"></ion-icon>
+  </ion-item>
+
+  <ion-item class="stats">
+    <ion-item item-left>
+      <div class="block">
+        <img src="http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png" alt="">
+        <p>{{ matchData.stats.championsKilled }} / {{ matchData.stats.numDeaths }} / {{ matchData.stats.assists }}
+          ( {{((matchData.stats.championsKilled + matchData.stats.numDeaths) / matchData.stats.numDeaths ).toFixed(2)}})</p>
+      </div>
+     <div class="block">
+       <img src="http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/minion.png" alt="">
+       <p>{{ matchData.stats.minionsKilled }}</p>
+     </div>
+    </ion-item>
+  </ion-item>
+
+</ion-content>
