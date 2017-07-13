@@ -1,5 +1,11 @@
 {
   "name": "leagueApp",
-  "app_id": "",
-  "type": "ionic-angular"
+  "app_id": "7149379c",
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://ru.api.riotgames.com/lol"
+    }
+  ]
 }

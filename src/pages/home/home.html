@@ -1,14 +1,69 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      leagueApp {{ version }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+
+    <ion-item>
+      <ion-input [(ngModel)]="nickname" type="text" placeholder="Nickname"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-item>
+    <ion-label>Region</ion-label>
+    <ion-select [(ngModel)]="region">
+      <ion-option value="ru">Russia</ion-option>
+      <ion-option value="euw">EU West</ion-option>
+      <ion-option value="eun">EU Nordic & East</ion-option>
+      <ion-option value="na">North America</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="matches && matches.length > 0">
+    <ion-card *ngFor="let game of matches" (click)="matchDetails(game)">
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img [src]="game.champImg">
+        </ion-avatar>
+        <h2>{{ game.champName }}</h2>
+        <p>{{ game.champTitle }}</p>
+      </ion-item>
+
+      <ion-card-content>
+        <div class="items">
+          <img *ngFor="let img of game.itemImages" [src]="img.link" [class.hidden]="img.link.indexOf('undefined') > -1" (click)="itemDetails(img.key)">
+        </div>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 Likes</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4 Comments</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            11h ago
+          </ion-note>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+  </div>
+
+  <button ion-button (click)="searchSummoner()">Search</button>
 </ion-content>
