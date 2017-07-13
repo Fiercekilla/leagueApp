@@ -43,10 +43,19 @@
     flex-direction:row;
     justify-content: center;
     align-items:center;
+    &:last-child {
+      img {
+        margin-top: 0;
+      }
+      p {
+        margin-left: 5px;
+      }
+    }
     img {
       margin-top:10px;
     }
     p {
+      margin-left: -10px;
       color: white;
     }
   }

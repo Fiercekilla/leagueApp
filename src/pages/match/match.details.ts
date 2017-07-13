@@ -18,6 +18,7 @@ export class MatchDetails {
     console.log(navParams.get('details'));
     this.matchData = navParams.get('details');
     this.bgChampImg = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${this.matchData.champKey}_0.jpg`;
+    this.matchData.timePlayedString = `${Math.ceil(this.matchData.stats.timePlayed / 60)} мин. ${this.matchData.stats.timePlayed % 60} сек.`;
     // this.api.getMatchInfo(navParams.get('details')).subscribe(res => {
     //   this.matchData = res;
     //   console.log(this.matchData);
