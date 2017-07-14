@@ -7,7 +7,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class ApiService {
 
-  private apiKey = 'RGAPI-8e4ba480-2a17-491e-9a27-fba6905c53da';
+  private apiKey = 'RGAPI-4e243a1d-f3ab-49f9-8d78-1c434363f3c1';
   public summonerId:any;
 
  constructor(private http: Http) {}
@@ -48,6 +48,13 @@ getMatchInfo(id:any) {
      .map((res:Response) => {
         return res.json();
      }) ;
+}
+
+getFullMatchInfo(id:any) {
+   return this.http.get(`api/match/v3/matches/${id}?api_key=${this.apiKey}`)
+     .map((res:Response) => {
+      return res.json();
+     });
 }
 
 

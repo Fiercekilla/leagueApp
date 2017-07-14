@@ -17,7 +17,7 @@
       <div class="block">
         <img src="http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png" alt="">
         <p>{{ matchData.stats.championsKilled }} / {{ matchData.stats.numDeaths }} / {{ matchData.stats.assists }}
-          ( {{((matchData.stats.championsKilled + matchData.stats.numDeaths) / matchData.stats.numDeaths ).toFixed(2)}})</p>
+          ( {{((matchData.stats.championsKilled + matchData.stats.assists) / matchData.stats.numDeaths ).toFixed(2)}})</p>
       </div>
      <div class="block">
        <img src="http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/minion.png" alt="">
@@ -28,6 +28,36 @@
         <p>{{ matchData.timePlayedString }}</p>
       </div>
     </ion-item>
+  </ion-item>
+
+  <ion-item class="players">
+    <ion-segment [(ngModel)]="teamId" color="light">
+      <ion-segment-button [value]="100">
+        <p class="lightblue">Blue team</p>
+      </ion-segment-button>
+      <ion-segment-button [value]="200">
+        <p class="lightred">Red team</p>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-list *ngIf="fullMatchInfo && fullMatchInfo.participants">
+      <ion-item-sliding #item1 *ngFor="let item of fullMatchInfo.participants" [class.hidden]="item.teamId !== teamId">
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + item.champKey + '.png'" alt="">
+          </ion-avatar>
+          <div class="item-inner player-stats">
+            <p>{{ item.summonerName }}</p>
+            <p>{{ item.stats.kills }} / {{ item.stats.deaths }} / {{ item.stats.assists }}
+              ( {{((item.stats.kills + item.stats.assists) / item.stats.deaths ).toFixed(2)}})</p>
+          </div>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button (click)="favorite(item)">Favorite</button>
+          <button ion-button color="danger" (click)="share(item)">Share</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </ion-item>
 
 </ion-content>
